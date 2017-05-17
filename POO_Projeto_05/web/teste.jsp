@@ -3,6 +3,8 @@
     Created on : 15/05/2017, 21:27:16
     Author     : Andréia
 --%>
+<%@page import="com.domain.quiz.DataBase"%>
+<%@page import="com.domain.quiz.Jogador"%>
 <%@page import="java.util.Collections"%>
 <%@page import="com.domain.quiz.Quiz"%>
 <%@page import="com.domain.quiz.Question"%>
@@ -24,6 +26,8 @@
             request.getParameter("8"),
             request.getParameter("9")
         });
+        Jogador j = new Jogador(request.getParameter("nome"), (100.* Quiz.getLastGrade())+"");
+        DataBase.BD.put(j.getJogador(), j);
         response.sendRedirect("index.jsp");
     }
 %>
@@ -99,11 +103,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
         </div>
         <div class="w3-container">
           
-          <form>
+            <form method="GET">
               <div class="w3-container">
                   <br>
           <h5 class="w3-opacity"><b>Informe seu nome:</b></h5>
-           <input type="text" name="nome" class="w3-text-teal"/>
+           <input type="text" name="nome" class="w3-text-teal" />
            <br><br>
            <hr>
            <br>
