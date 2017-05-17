@@ -1,7 +1,15 @@
 
+<%@page import="com.domain.quiz.Jogador"%>
+<%@page import="com.domain.quiz.DataBase"%>
 <%@page import="com.domain.quiz.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (DataBase.BD == null) {
+        Jogador j = new Jogador("0", "0");
+        DataBase.BD.put("", j);
+    }
+%>
 <html>
 
     <title>Quiz - GOT</title>
@@ -15,7 +23,7 @@
             <div class="w3-half w3-black w3-container w3-center" style="height:1000px">
                 <div class="w3-padding-64">
                     <h2>Quiz Game Of Thrones</h2>
-                    
+
                 </div>
                 <div class="w3-row">
                     <div class="w3-half">
@@ -47,67 +55,43 @@
             <div class="w3-half w3-blue-grey w3-container" style="height:1000px">
                 <div class="w3-padding-64 w3-center">
                     <h1>Teste seus conhecimentos</h1>
-                     <hr/>
+                    <hr/>
                     <h3>Última nota:</h3>
-            <%= 100.0 * Quiz.getLastGrade()%>%
-            <h3>Média</h3>
-            <%= 100.0 * Quiz.getGradeAverage()%>%
-            <hr/>
-            <a href="teste.jsp">
-                <button>Iniciar Teste</button>
-            </a>
+                    <%= 100.0 * Quiz.getLastGrade()%>%
+                    <h3>Média</h3>
+                    <%= 100.0 * Quiz.getGradeAverage()%>%
+                    <hr/>
+                    <a href="teste.jsp">
+                        <button>Iniciar Teste</button>
+                    </a>
                     <hr/>
                     <div class="w3-left-align w3-padding-large">
                         <h2>Classificação Geral</h2>
-                    <div class="w3-container w3-responsive">
-                        <table class="w3-table">
-                            <tr>
-                                <th>Year</th>
-                                <th>Title</th>
-                                <th>Where</th>
-                            </tr>
-                            <tr class="w3-white">
-                                <td>2012-2016</td>
-                                <td>The rest is history..</td>
-                                <td>Lorem ipsum</td>
-                            </tr>
-                            <tr>
-                                <td>2009-2012</td>
-                                <td>Started my own company</td>
-                                <td>My Garage</td>
-                            </tr>
-                            <tr class="w3-white">
-                                <td>2008-2009</td>
-                                <td>Started working for Lorem</td>
-                                <td>London, UK</td>
-                            </tr>
-                            <tr>
-                                <td>2005-2008</td>
-                                <td>Degree in Bachelor of Design</td>
-                                <td>Harvard, USA</td>
-                            </tr>
-                            <tr class="w3-white">
-                                <td>2002-2005</td>
-                                <td>Degree in Bachelor of Business</td>
-                                <td>RMIT University, Melbourne, Australia</td>
-                            </tr>
-                            <tr class="w3-hide-medium">
-                                <td>2002-2005</td>
-                                <td>Degree in Bachelor of Business</td>
-                                <td>RMIT University, Melbourne, Australia</td>
-                            </tr>
-                        </table>
+                        <div class="w3-container w3-responsive">
+                            <table class="w3-table">
+                                <tr>
+                                    <th>Pontuação</th>
+                                    <th>Jogador</th>
+                                </tr>
+                                <% for (String key : DataBase.BD.keySet()) { %>
+                                <tr class="w3-white">
+                                    <% Jogador jog = DataBase.BD.get(key);%>
+                                    <td style="border-style: double"><%= jog.getPontos()%></td>
+                                    <td style="border-style: double"><%= jog.getJogador()%></td>
+                                </tr>
+                                <% }%>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-            
-      <!-- Footer -->
+
+        <!-- Footer -->
         <footer class="w3-container w3-black w3-padding-16 text-center">
             <p>FATEC/PG - POO-Vespertino - Andréia e Mary </p>
         </footer> 
     </body>
 </html>
 
- 
+
