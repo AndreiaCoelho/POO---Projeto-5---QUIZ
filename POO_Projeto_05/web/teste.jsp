@@ -3,6 +3,7 @@
     Created on : 15/05/2017, 21:27:16
     Author     : Andréia
 --%>
+<%@page import="java.util.Collections"%>
 <%@page import="com.domain.quiz.Quiz"%>
 <%@page import="com.domain.quiz.Question"%>
 <%@page import="java.util.ArrayList"%>
@@ -108,7 +109,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
            <br>
            
             <span class="w3-tag w3-teal w3-round">
-            <%ArrayList<Question> test = Quiz.getTest();%>
+            <%ArrayList<Question> test = Quiz.getTest();
+              Collections.shuffle(test);
+            %>
             <%for(Question q: test){%>
             <h4 align="left"><%= q.getQuestion() %></h4>
                 <%for(String alternative: q.getAlternatives()){%>
@@ -119,11 +122,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <hr/>
             <%}%>
             <input type="submit" name="test" value="Concluir"/>
-        </form>
+        
             <br><br> 
          
       </div>
-     
+     </form>
       </div>
       </div>
     
